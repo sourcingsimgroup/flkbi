@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #D9ECF6;
+  margin: 0;
+  padding: 40px;
+}
+     .container {
+  position: relative;
+  max-width: 700px;
+  width: 100%;
+  margin: -20px auto 0 auto;
+  background-color: #fff;
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+    
+
+    .container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 10px; /* ~1 cm (10px) */
+    width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #003366; /* biru tua */
+    }
+
+      .header { text-align: center; margin-bottom: 30px; }
+.header img {
+  width: calc(100% + 80px);
+  height: auto;
+  display: block;
+  margin: -20px 0 15px -40px;
+  border-radius: 0;
+}
+
+/* Adjust header image for mobile */
+@media (max-width: 600px) {
+  .header img {
+    width: 100%; /* Adjust to 100% width on small screens */
+    margin: 0;
+  }
+}
+
+
+      .header h1 { font-size: 33px; color: #333; margin: 0; font-weight: bold; }
+      .header p { font-size: 14px; color: #666; margin-top: -2px; }
+      
+.notice-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 20px 0 30px 0;
+}
+
+.notice-wrapper img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  border-radius: 4px;
+  margin-top: 5px;
+}
+
+.notice {
+  background-color: #fff8e5;
+  border-left: 4px solid #ffa500;
+  padding: 10px 15px;
+  border-radius: 6px;
+  font-size: 16px;
+  color: #555;
+  flex: 1;
+  text-align: justify; /* ⬅️ Ini yang meratakan kanan kiri */
+}
+
+
+
+      
+      .notice a {
+        color: #0077cc;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      label { display: block; margin-top: 20px; font-weight: 600; color: #333; }
+      input, select, textarea {
+  width: 100%;
+  padding: 10px 1px;
+  margin-top: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+      input:focus, select:focus, textarea:focus { border-color: #0077cc; outline: none; }
+      button {
+  margin-top: 30px;
+  width: 100%;  /* Full width on mobile */
+  padding: 12px;
+  background-color: #0077cc;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+      button:hover { background-color: #005fa3; }
+      .modal { display: none; position: fixed; z-index: 100; padding-top: 120px; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0, 0, 0, 0.4); }
+      .modal-content {
+  width: 80%;
+  max-width: 600px;
+  margin: auto;
+  padding: 25px;
+  border: 1px solid #888;
+  border-radius: 10px;
+  text-align: center;
+  background-color: #fff; /* Pastikan konten tetap putih solid */
+}
+
+<textarea name="kec._domisili" style="height: 40px; resize: none;"></textarea>
+
+<textarea name="kel._kelurahan" style="height: 40px; resize: none;"></textarea>
+
+
+/* Modal styling for smaller screens */
+@media (max-width: 600px) {
+  .modal-content {
+    width: 90%;  /* Adjust modal width for small screens */
+  }
+}
+      .modal-content h2 { color: #0077cc; }
+      .modal-content p {
+        font-size: 14px;
+        color: #444;
+        margin-top: 10px;
+        line-height: 1.5;
+      }
+
+
+      .modal-content .ig-list {
+      text-align: left;
+      margin-top: 15px;
+      font-size: 12px;
+    }
+
+
+      .modal-content .ig-list strong {
+        display: inline-block;
+        width: 250px;
+      }
+
+      .close-btn { margin-top: 20px; background-color: #0077cc; color: white; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; }
+      
+      @media (max-width: 600px) {
+.modal-content .ig-list strong {
+        display: inline-block;
+        width: 180px;
+      }
+
+  body {
+    padding: 20px;
+  }
+
+  .container {
+    padding: 15px;
+  }
+
+  label, input, select, textarea, button {
+    font-size: 14px;
+  }
+
+.notice {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+
+  /* Adjust modal for smaller screens */
+  .modal-content {
+    width: 95%;  /* Make sure modal fits well */
+    padding: 20px;
+  }
+
+  /* Adjust modal for smaller screens */
+  .modal-content {
+    width: 95%;  /* Make sure modal fits well */
+    padding: 20px;
+  }
+
+  /* Buttons inside modal */
+  .close-btn {
+    width: 100%;
+    padding: 12px;
+  }
+}
+
+      
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header">
+        <img src="https://res.cloudinary.com/djo0ewqoz/image/upload/v1746072866/WhatsApp_Image_2025-04-30_at_16.12.56_wgcbqt.jpg" alt="Logo">
+        <h1>Form Lamaran Kerja - REVO ADIRA</h1>
+        <p>SIMGROUP adalah perusahaan penyedia dan pengelola tenaga kerja alih daya (outsourcing)<br>untuk berbagai sektor industri di Indonesia</p>
+      </div>
+ <div class="notice-wrapper">
+  <div class="notice">
+    Apabila Anda menemukan penipuan/pemungutan biaya yang mengatasnamakan PT Swakarya Insan Mandiri, bantu kami dengan melaporkannya ke Layanan Pengaduan SIMGROUP melalui Customer Service SIM:
+    <a href="http://bit.ly/TiketSISKA" target="_blank">http://bit.ly/TiketSISKA</a>
+  </div>
+  <img src="https://res.cloudinary.com/djo0ewqoz/image/upload/c_crop,ar_9:16/v1749719941/WhatsApp_Image_2025-06-12_at_16.18.24_kom9gl.jpg" alt="Ikon">
+</div>
+
+
+      <form id="dynamicForm">
+        <label>Email Aktif</label>
+        <input type="email" name="email" required>
+
+        <label>Sumber Informasi Lowongan</label>
+        <select name="sumber_informasi" required id="sumber_informasi">
+          <option value="" disabled selected>-- Pilih --</option>
+        </select>
+
+        <label>Nama Lengkap (Sesuai KTP)</label>
+        <input type="text" name="nama_lengkap" required>
+
+        <label>Tanggal Lahir</label>
+        <input type="date" name="tanggal_lahir" required>
+
+        <label>Nomor WA Aktif</label>
+<input type="text" name="nomor_wa" required pattern="^0[0-9]{9,}$" title="Nomor WA harus dimulai dengan 0 dan diikuti oleh angka" placeholder="Contoh: 081234567890">
+
+        <label>Nomor HP Aktif</label>
+<input type="text" name="nomor_hp" required pattern="^0[0-9]{9,}$" title="Nomor HP harus dimulai dengan 0 dan diikuti oleh angka" placeholder="Contoh: 081234567890">
+
+        <label>Jenis Kelamin</label>
+        <select name="jenis_kelamin" required>
+          <option value="" disabled selected>-- Pilih --</option>
+          <option value="Laki-Laki">Laki-Laki</option>
+          <option value="Perempuan">Perempuan</option>
+        </select>
+
+        <label>Pengalaman Posisi Kerja Terakhir</label>
+        <input type="text" name="pengalaman_kerja" required>
+
+        <label>Durasi Pengalaman Kerja</label>
+        <select name="durasi_pengalaman" required id="durasi_pengalaman">
+        <option value="" disabled selected>-- Pilih --</option>
+        </select>
+
+<label>Minat Posisi Kerja Pilihan Pertama</label>
+<input type="text" name="minat_posisi_1" list="minatList" placeholder="Silakan ketik atau pilih" required>
+<datalist id="minatList"></datalist>
+
+<label>Minat Posisi Kerja Pilihan Kedua</label>
+<input type="text" name="minat_posisi_2" list="minatList" placeholder="Silakan ketik atau pilih">
+<datalist id="minatList"></datalist>
+
+<p style="font-size: 10px; color: red; margin-top: 3px; margin-bottom: -12px;">
+  *Diisi jika ada
+</p>
+
+<label>Minat Posisi Kerja Pilihan Ketiga</label>
+<input type="text" name="minat_posisi_3" list="minatList" placeholder="Silakan ketik atau pilih">
+<datalist id="minatList"></datalist>
+
+<p style="font-size: 10px; color: red; margin-top: 3px; margin-bottom: -12px;">
+  *Diisi jika ada
+</p>
+
+
+        <label>Pendidikan Terakhir</label>
+        <select name="pendidikan_terakhir" required id="pendidikan_terakhir">
+          <option value="" disabled selected>-- Pilih --</option>
+        </select>
+
+        <label>Nama Sekolah / Nama Universitas</label>
+<input type="text" name="nama_sekolah" list="universitasList" placeholder="Silakan ketik atau pilih" required>
+<datalist id="universitasList"></datalist>
+
+        <label for="jurusanInput">Jurusan</label>
+<input type="text" id="jurusanInput" name="jurusan" list="jurusanList" placeholder="Silakan ketik atau pilih" required>
+<datalist id="jurusanList"></datalist>
+
+
+        <label>Kepemilikan Kendaraan</label>
+        <select name="kepemilikan_kendaraan" equired id="kepemilikan_kendaraan">
+          <option value="" disabled selected>-- Pilih --</option>
+        </select>
+
+        <label>Kepemilikan SIM Aktif</label>
+        <select name="kepemilikan_sim" equired id="kepemilikan_sim">
+          <option value="" disabled selected>-- Pilih --</option>
+        </select>
+
+        <label>Alamat Domisili</label>
+        <textarea name="alamat_domisili" required></textarea>
+
+        <label>Kec. Domisili</label> 
+<input type="text" name="kec._domisili" required>
+
+
+<label>Provinsi Domisili</label>
+<select name="provinsi_domisili" required id="provinsi_domisili">
+  <option value="" disabled selected>-- Pilih --</option>
+</select>
+
+        <label>Upload CV (PDF)</label>
+        <input type="file" name="upload_cv" accept="application/pdf" required>
+
+        <label>Provinsi Minat Penempatan</label>
+        <select name="provinsi_penempatan" required id="provinsi_penempatan">
+        <option value="" disabled selected>-- Pilih --</option>
+        </select>
+
+        <p style="font-size: 10px; color: red; margin-top: 3px; margin-bottom: -12px;">
+  *Pilih Provinsi Penempatan agar dapat memilih Kota penempatan
+</p>
+
+        <label>Kota Minat Penempatan</label>
+        <select name="kota_penempatan" required id="kota_penempatan">
+          <option value="" disabled selected>-- Pilih --</option>
+        </select>
+
+
+
+<button type="submit">Kirim</button>
+      </form>
+    </div>
+
+    <div id="successModal" class="modal">
+      <div class="modal-content">
+        <h2>Data berhasil dikirim!</h2>
+        <p style="text-align: left;">Untuk Informasi Lowongan Kerja terbaru dapat diakses melalui Instagram Kami:</p>
+        <div class="ig-list">
+          <strong>Official Account</strong> @swamandiri @careersimgroup<br>
+          <strong>Loker wilayah Bekasi</strong> @simgroupbekasi<br>
+          <strong>Loker wilayah Jakarta</strong> @simgroupjakarta<br>
+          <strong>Loker wilayah Bogor</strong> @simgroupbodebek<br>
+          <strong>Loker wilayah Jawa Barat</strong> @simgroupjabar<br>
+          <strong>Loker wilayah Jawa Tengah</strong> @simgroupjateng<br>
+          <strong>Loker wilayah Jawa Timur</strong> @simgroupjawatimur<br>
+          <strong>Loker wilayah Kalimantan</strong> @simgroupkalimantan<br>
+          <strong>Loker wilayah Sumatera</strong> @simgroupsumbagut <br>
+          <strong>Loker wilayah Sumatera</strong> @simgroupsumbagsel<br>
+          <strong>Loker wilayah Sulawesi, Maluku & Papua</strong> @simgroupsulampapua<br>
+          <strong>Loker wilayah Bali & Nusa Tenggara</strong> @simgroupbalinusra
+        </div>
+        <br>
+        <p style="color: red; font-weight: bold;">
+          ⚠️ <strong>Seluruh Proses Recruitment GRATIS tidak dipungut biaya apapun</strong> ⚠️
+        </p>
+        <button class="close-btn" onclick="closeModal()">Tutup</button>
+      </div>
+    </div>
+
+    <script>
+      const form = document.getElementById('dynamicForm');
+
+      window.onload = function() {
+        const universitasList = document.getElementById('universitasList');
+
+        dropdownData.namaUniversitas.forEach(function(univ) {
+          const option = document.createElement('option');
+          option.value = univ;
+          universitasList.appendChild(option);
+        });
+
+const minatList = document.getElementById('minatList');
+dropdownData.minatPosisi.forEach(function(min) {
+  const option = document.createElement('option');
+  option.value = min;
+  minatList.appendChild(option);  // ✅ gunakan 'minatList'
+});
+
+
+
+        const jurusanList = document.getElementById('jurusanList');
+        dropdownData.jurusan.forEach(function(jurusan) {
+        const option = document.createElement('option');
+        option.value = jurusan;
+        option.textContent = jurusan;  // ✅ tambah textContent (optional tapi bagus)
+        jurusanList.appendChild(option);
+        });
+
+        const sumberDropdown = document.getElementById('sumber_informasi');
+        dropdownData.sumberInformasi.forEach(item => {
+          const option = document.createElement('option');
+          option.value = item; option.textContent = item;
+          sumberDropdown.appendChild(option);
+        });
+
+        const durasiDropdown = document.getElementById('durasi_pengalaman');
+        dropdownData.durasi.forEach(item => {
+          const option = document.createElement('option');
+          option.value = item; option.textContent = item;
+          durasiDropdown.appendChild(option);
+        });
+
+        const pendidikanDropdown = document.getElementById('pendidikan_terakhir');
+        dropdownData.pendidikan.forEach(item => {
+          const option = document.createElement('option');
+          option.value = item; option.textContent = item;
+          pendidikanDropdown.appendChild(option);
+        });
+
+
+        const simDropdown = document.getElementById('kepemilikan_sim');
+        dropdownData.sim.forEach(item => {
+          const option = document.createElement('option');
+          option.value = item; option.textContent = item;
+          simDropdown.appendChild(option);
+        });
+
+        const kendaraanDropdown = document.getElementById('kepemilikan_kendaraan');
+        dropdownData.kendaraan.forEach(item => {
+          const option = document.createElement('option');
+          option.value = item; option.textContent = item;
+          kendaraanDropdown.appendChild(option);
+        });
+
+                const provinsiDomisiliDropdown = document.getElementById('provinsi_domisili');
+dropdownData.provinsi.forEach(item => {
+  const option = document.createElement('option');
+  option.value = item;
+  option.textContent = item;
+  provinsiDomisiliDropdown.appendChild(option);
+});
+
+        const provinsiDropdown = document.getElementById('provinsi_penempatan');
+        const kotaDropdown = document.getElementById('kota_penempatan');
+        dropdownData.provinsi.forEach(item => {
+          const option = document.createElement('option');
+          option.value = item; option.textContent = item;
+          provinsiDropdown.appendChild(option);
+        });
+
+        provinsiDropdown.addEventListener('change', function() {
+          kotaDropdown.innerHTML = '<option value="" disabled selected>-- Pilih --</option>';
+          const selectedProvinsi = this.value;
+          const kotaList = dropdownData.provinsiKotaMap[selectedProvinsi] || [];
+          kotaList.forEach(kota => {
+            const option = document.createElement('option');
+            option.value = kota; option.textContent = kota;
+            kotaDropdown.appendChild(option);
+          });
+        });
+        };
+        
+     form.addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const submitButton = form.querySelector('button');
+  submitButton.disabled = true;
+  const originalButtonText = submitButton.textContent;
+  submitButton.textContent = 'Mengirim...';
+
+  const formData = new FormData(form);
+  const values = [];
+  form.querySelectorAll('input, select, textarea').forEach(input => {
+    if (input.name !== 'upload_cv') values.push(formData.get(input.name));
+  });
+
+  const file = formData.get('upload_cv');
+  if (!file || file.type !== 'application/pdf') {
+    alert('Mohon upload file PDF.');
+    submitButton.disabled = false;
+    submitButton.textContent = originalButtonText;
+    return;
+  }
+
+  if (file.size > 2 * 1024 * 1024) { // 2MB
+    alert('Ukuran file maksimum 2MB.');
+    submitButton.disabled = false;
+    submitButton.textContent = originalButtonText;
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function() {
+    const base64 = reader.result.split(',')[1];
+    google.script.run
+      .withSuccessHandler(() => {
+        form.reset();
+        document.getElementById('successModal').style.display = 'block';
+        submitButton.disabled = false;
+        submitButton.textContent = originalButtonText;
+      })
+      .withFailureHandler(error => {
+        alert('Gagal mengirim data: ' + error.message);
+        submitButton.disabled = false;
+        submitButton.textContent = originalButtonText;
+      })
+      .uploadCV(values, base64, file.name);
+  };
+  reader.readAsDataURL(file);
+});
+
+function closeModal() {
+  document.getElementById('successModal').style.display = 'none';
+}
+
+
+
+    </script>
+  </body>
+</html>
